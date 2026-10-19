@@ -265,7 +265,8 @@ with hero_copy:
         <h1 class="hero-title">안녕하세요,<br />이유리<span>입니다.</span></h1>
         <p class="hero-copy">
             경복비즈니스고등학교 IT비즈니스과 3학년입니다.<br />
-        </p>
+            배운 지식과 경험을 바탕으로 맡은 일에 책임감을 가지고 꾸준히 성장하며<br />
+        항상 성실하고 최선을 다하는 태도를 유지하겠습니다.</p>
         """,
         unsafe_allow_html=True,
     )
