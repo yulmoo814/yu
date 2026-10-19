@@ -1,19 +1,17 @@
-# :earth_americas: GDP dashboard template
+# 이유리 자기소개 페이지
 
-A simple Streamlit app showing the GDP of different countries in the world.
+이유리의 이름, 나이, 학교, 전공을 소개하는 Streamlit 페이지입니다.
 
-[![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://gdp-dashboard-template.streamlit.app/)
+## 실행 방법
 
-### How to run it on your own machine
+1. 필요한 패키지를 설치합니다.
 
-1. Install the requirements
-
-   ```
-   $ pip install -r requirements.txt
+   ```bash
+   pip install -r requirements.txt
    ```
 
-2. Run the app
+2. 앱을 실행합니다.
 
-   ```
-   $ streamlit run streamlit_app.py
+   ```bash
+   streamlit run streamlit_app.py
    ```

@@ -1,151 +1,283 @@
 import streamlit as st
-import pandas as pd
-import math
-from pathlib import Path
 
-# Set the title and favicon that appear in the Browser's tab bar.
+
 st.set_page_config(
-    page_title='GDP dashboard',
-    page_icon=':earth_americas:', # This is an emoji shortcode. Could be a URL too.
+    page_title="이유리 | 자기소개",
+    page_icon="🌿",
+    layout="wide",
+    initial_sidebar_state="collapsed",
 )
 
-# -----------------------------------------------------------------------------
-# Declare some useful functions.
-
-@st.cache_data
-def get_gdp_data():
-    """Grab GDP data from a CSV file.
-
-    This uses caching to avoid having to read the file every time. If we were
-    reading from an HTTP endpoint instead of a file, it's a good idea to set
-    a maximum age to the cache with the TTL argument: @st.cache_data(ttl='1d')
+st.markdown(
     """
+    <style>
+    @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;600;700;800&display=swap');
 
-    # Instead of a CSV on disk, you could read from an HTTP endpoint here too.
-    DATA_FILENAME = Path(__file__).parent/'data/gdp_data.csv'
-    raw_gdp_df = pd.read_csv(DATA_FILENAME)
+    :root {
+        --ink: #202820;
+        --muted: #687269;
+        --green: #527a5d;
+        --green-dark: #355440;
+        --cream: #f7f8f3;
+        --line: #e7ebe3;
+    }
 
-    MIN_YEAR = 1960
-    MAX_YEAR = 2022
+    .stApp {
+        background:
+            radial-gradient(ellipse at 92% 5%, rgba(210, 229, 210, .45), transparent 26rem),
+            var(--cream);
+        color: var(--ink);
+        font-family: 'DM Sans', 'Noto Sans KR', sans-serif;
+    }
 
-    # The data above has columns like:
-    # - Country Name
-    # - Country Code
-    # - [Stuff I don't care about]
-    # - GDP for 1960
-    # - GDP for 1961
-    # - GDP for 1962
-    # - ...
-    # - GDP for 2022
-    #
-    # ...but I want this instead:
-    # - Country Name
-    # - Country Code
-    # - Year
-    # - GDP
-    #
-    # So let's pivot all those year-columns into two: Year and GDP
-    gdp_df = raw_gdp_df.melt(
-        ['Country Code'],
-        [str(x) for x in range(MIN_YEAR, MAX_YEAR + 1)],
-        'Year',
-        'GDP',
+    .block-container {
+        max-width: 1040px;
+        padding: 3.3rem 2rem 2rem;
+    }
+
+    [data-testid="stHeader"], [data-testid="stToolbar"] {
+        background: transparent;
+    }
+
+    .eyebrow {
+        color: var(--green);
+        font-size: .78rem;
+        font-weight: 700;
+        letter-spacing: .2em;
+        margin: 0 0 1.1rem;
+    }
+
+    .hero-title {
+        color: var(--ink);
+        font-size: clamp(3.5rem, 9vw, 6.6rem);
+        font-weight: 800;
+        letter-spacing: -.075em;
+        line-height: 1.06;
+        margin: 0;
+    }
+
+    .hero-title span {
+        color: var(--green);
+    }
+
+    .hero-copy {
+        color: var(--muted);
+        font-size: 1.08rem;
+        line-height: 1.9;
+        margin: 1.35rem 0 0;
+    }
+
+    .identity-card {
+        align-items: center;
+        background: linear-gradient(145deg, #e6efe4, #d9e7d8);
+        border: 1px solid rgba(82, 122, 93, .12);
+        border-radius: 28px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        min-height: 300px;
+        overflow: hidden;
+        position: relative;
+        text-align: center;
+    }
+
+    .identity-card::before, .identity-card::after {
+        border: 1px solid rgba(82, 122, 93, .14);
+        border-radius: 50%;
+        content: "";
+        height: 260px;
+        position: absolute;
+        width: 260px;
+    }
+
+    .identity-card::before {
+        right: -128px;
+        top: -138px;
+    }
+
+    .identity-card::after {
+        bottom: -190px;
+        left: -90px;
+        height: 300px;
+        width: 300px;
+    }
+
+    .identity-mark {
+        align-items: center;
+        background: rgba(255, 255, 255, .7);
+        border: 1px solid rgba(255, 255, 255, .9);
+        border-radius: 50%;
+        box-shadow: 0 16px 45px rgba(53, 84, 64, .1);
+        color: var(--green-dark);
+        display: flex;
+        font-size: 2.5rem;
+        font-weight: 700;
+        height: 116px;
+        justify-content: center;
+        letter-spacing: -.08em;
+        position: relative;
+        width: 116px;
+        z-index: 1;
+    }
+
+    .identity-caption {
+        color: var(--green-dark);
+        font-size: .78rem;
+        font-weight: 700;
+        letter-spacing: .18em;
+        margin-top: 1.2rem;
+        position: relative;
+        z-index: 1;
+    }
+
+    .section-label {
+        color: var(--green);
+        font-size: .75rem;
+        font-weight: 700;
+        letter-spacing: .17em;
+        margin: 0 0 .4rem;
+    }
+
+    .section-title {
+        color: var(--ink);
+        font-size: 1.8rem;
+        font-weight: 700;
+        letter-spacing: -.05em;
+        margin: 0 0 1.4rem;
+    }
+
+    .profile-card {
+        background: rgba(255, 255, 255, .76);
+        border: 1px solid var(--line);
+        border-radius: 20px;
+        height: 100%;
+        padding: 1.35rem 1.45rem;
+    }
+
+    .profile-label {
+        color: #859087;
+        font-size: .78rem;
+        font-weight: 600;
+        margin-bottom: .55rem;
+    }
+
+    .profile-value {
+        color: var(--ink);
+        font-size: 1.1rem;
+        font-weight: 700;
+    }
+
+    .about-card {
+        background: var(--green-dark);
+        border-radius: 22px;
+        color: #f7faf5;
+        padding: 1.7rem 1.9rem;
+    }
+
+    .about-card .about-kicker {
+        color: #c8ddc8;
+        font-size: .75rem;
+        font-weight: 700;
+        letter-spacing: .16em;
+        margin-bottom: .8rem;
+    }
+
+    .about-card p {
+        color: #f2f6ef;
+        font-size: 1rem;
+        line-height: 1.9;
+        margin: 0;
+    }
+
+    .footer {
+        border-top: 1px solid var(--line);
+        color: #879087;
+        font-size: .8rem;
+        margin-top: 3.4rem;
+        padding-top: 1.2rem;
+        text-align: center;
+    }
+
+    @media (max-width: 640px) {
+        .block-container {
+            padding: 2rem 1.15rem 1rem;
+        }
+
+        .identity-card {
+            min-height: 230px;
+        }
+    }
+    </style>
+    """,
+    unsafe_allow_html=True,
+)
+
+hero_copy, hero_art = st.columns([1.25, 0.75], gap="large", vertical_alignment="center")
+
+with hero_copy:
+    st.markdown(
+        """
+        <p class="eyebrow">A LITTLE INTRODUCTION</p>
+        <h1 class="hero-title">안녕하세요,<br />이유리<span>입니다.</span></h1>
+        <p class="hero-copy">
+            경복비즈니스고등학교 3학년,<br />
+            IT비즈니스과에서 배우고 있는 이유리입니다.
+        </p>
+        """,
+        unsafe_allow_html=True,
     )
 
-    # Convert years from string to integers
-    gdp_df['Year'] = pd.to_numeric(gdp_df['Year'])
+with hero_art:
+    st.markdown(
+        """
+        <div class="identity-card">
+            <div class="identity-mark">유리</div>
+            <div class="identity-caption">IT BUSINESS</div>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
 
-    return gdp_df
+st.write("")
+st.write("")
 
-gdp_df = get_gdp_data()
-
-# -----------------------------------------------------------------------------
-# Draw the actual page
-
-# Set the title that appears at the top of the page.
-'''
-# :earth_americas: GDP dashboard
-
-Browse GDP data from the [World Bank Open Data](https://data.worldbank.org/) website. As you'll
-notice, the data only goes to 2022 right now, and datapoints for certain years are often missing.
-But it's otherwise a great (and did I mention _free_?) source of data.
-'''
-
-# Add some spacing
-''
-''
-
-min_value = gdp_df['Year'].min()
-max_value = gdp_df['Year'].max()
-
-from_year, to_year = st.slider(
-    'Which years are you interested in?',
-    min_value=min_value,
-    max_value=max_value,
-    value=[min_value, max_value])
-
-countries = gdp_df['Country Code'].unique()
-
-if not len(countries):
-    st.warning("Select at least one country")
-
-selected_countries = st.multiselect(
-    'Which countries would you like to view?',
-    countries,
-    ['DEU', 'FRA', 'GBR', 'BRA', 'MEX', 'JPN'])
-
-''
-''
-''
-
-# Filter the data
-filtered_gdp_df = gdp_df[
-    (gdp_df['Country Code'].isin(selected_countries))
-    & (gdp_df['Year'] <= to_year)
-    & (from_year <= gdp_df['Year'])
-]
-
-st.header('GDP over time', divider='gray')
-
-''
-
-st.line_chart(
-    filtered_gdp_df,
-    x='Year',
-    y='GDP',
-    color='Country Code',
+st.markdown(
+    """
+    <p class="section-label">ABOUT ME</p>
+    <h2 class="section-title">저를 소개합니다</h2>
+    """,
+    unsafe_allow_html=True,
 )
 
-''
-''
-
-
-first_year = gdp_df[gdp_df['Year'] == from_year]
-last_year = gdp_df[gdp_df['Year'] == to_year]
-
-st.header(f'GDP in {to_year}', divider='gray')
-
-''
-
-cols = st.columns(4)
-
-for i, country in enumerate(selected_countries):
-    col = cols[i % len(cols)]
-
-    with col:
-        first_gdp = first_year[first_year['Country Code'] == country]['GDP'].iat[0] / 1000000000
-        last_gdp = last_year[last_year['Country Code'] == country]['GDP'].iat[0] / 1000000000
-
-        if math.isnan(first_gdp):
-            growth = 'n/a'
-            delta_color = 'off'
-        else:
-            growth = f'{last_gdp / first_gdp:,.2f}x'
-            delta_color = 'normal'
-
-        st.metric(
-            label=f'{country} GDP',
-            value=f'{last_gdp:,.0f}B',
-            delta=growth,
-            delta_color=delta_color
+profile = st.columns(4, gap="medium")
+for column, label, value in zip(
+    profile,
+    ("이름", "나이", "학교", "전공"),
+    ("이유리", "19세", "경복비즈니스고등학교 · 3학년", "IT비즈니스과"),
+):
+    with column:
+        st.markdown(
+            f"""
+            <div class="profile-card">
+                <div class="profile-label">{label}</div>
+                <div class="profile-value">{value}</div>
+            </div>
+            """,
+            unsafe_allow_html=True,
         )
+
+st.write("")
+st.write("")
+st.markdown(
+    """
+    <div class="about-card">
+        <div class="about-kicker">MY SCHOOL LIFE</div>
+        <p>
+            경복비즈니스고등학교 IT비즈니스과에서 공부하며
+            IT와 비즈니스 분야를 함께 배워가고 있습니다.
+        </p>
+    </div>
+    <div class="footer">이유리 · 자기소개</div>
+    """,
+    unsafe_allow_html=True,
+)
