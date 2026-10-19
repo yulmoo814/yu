@@ -71,69 +71,6 @@ st.markdown(
         margin: 1.35rem 0 0;
     }
 
-    .identity-card {
-        align-items: center;
-        background: linear-gradient(145deg, #e6efe4, #d9e7d8);
-        border: 1px solid rgba(82, 122, 93, .12);
-        border-radius: 28px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        min-height: 300px;
-        overflow: hidden;
-        position: relative;
-        text-align: center;
-    }
-
-    .identity-card::before, .identity-card::after {
-        border: 1px solid rgba(82, 122, 93, .14);
-        border-radius: 50%;
-        content: "";
-        height: 260px;
-        position: absolute;
-        width: 260px;
-    }
-
-    .identity-card::before {
-        right: -128px;
-        top: -138px;
-    }
-
-    .identity-card::after {
-        bottom: -190px;
-        left: -90px;
-        height: 300px;
-        width: 300px;
-    }
-
-    .identity-mark {
-        align-items: center;
-        background: rgba(255, 255, 255, .7);
-        border: 1px solid rgba(255, 255, 255, .9);
-        border-radius: 50%;
-        box-shadow: 0 16px 45px rgba(53, 84, 64, .1);
-        color: var(--green-dark);
-        display: flex;
-        font-size: 2.5rem;
-        font-weight: 700;
-        height: 116px;
-        justify-content: center;
-        letter-spacing: -.08em;
-        position: relative;
-        width: 116px;
-        z-index: 1;
-    }
-
-    .identity-caption {
-        color: var(--green-dark);
-        font-size: .78rem;
-        font-weight: 700;
-        letter-spacing: .18em;
-        margin-top: 1.2rem;
-        position: relative;
-        z-index: 1;
-    }
-
     .section-label {
         color: var(--green);
         font-size: .75rem;
@@ -243,10 +180,6 @@ st.markdown(
             padding: 2rem 1.15rem 1rem;
         }
 
-        .identity-card {
-            min-height: 230px;
-        }
-
         .certificate-grid {
             grid-template-columns: 1fr;
         }
@@ -272,15 +205,7 @@ with hero_copy:
     )
 
 with hero_art:
-    st.markdown(
-        """
-        <div class="identity-card">
-            <div class="identity-mark">유리</div>
-            <div class="identity-caption">IT BUSINESS</div>
-        </div>
-        """,
-        unsafe_allow_html=True,
-    )
+    st.image("img/사진.jpg", width=280)
 
 st.write("")
 st.write("")
