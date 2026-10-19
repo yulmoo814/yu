@@ -39,6 +39,10 @@ st.markdown(
         background: transparent;
     }
 
+    [data-testid="stHeaderActionElements"] {
+        display: none;
+    }
+
     .eyebrow {
         color: var(--green);
         font-size: .78rem;
@@ -189,6 +193,42 @@ st.markdown(
         margin: 0;
     }
 
+    .certificates-section {
+        margin-top: 3.5rem;
+    }
+
+    .certificate-grid {
+        display: grid;
+        gap: .8rem;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .certificate-item {
+        align-items: center;
+        background: rgba(255, 255, 255, .76);
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        display: flex;
+        gap: 1rem;
+        justify-content: space-between;
+        min-height: 64px;
+        padding: .9rem 1.1rem;
+    }
+
+    .certificate-name {
+        color: var(--ink);
+        font-size: .95rem;
+        font-weight: 600;
+        line-height: 1.5;
+    }
+
+    .certificate-grade {
+        color: var(--green-dark);
+        flex: 0 0 auto;
+        font-size: .82rem;
+        font-weight: 700;
+    }
+
     .footer {
         border-top: 1px solid var(--line);
         color: #879087;
@@ -206,6 +246,10 @@ st.markdown(
         .identity-card {
             min-height: 230px;
         }
+
+        .certificate-grid {
+            grid-template-columns: 1fr;
+        }
     }
     </style>
     """,
@@ -220,8 +264,7 @@ with hero_copy:
         <p class="eyebrow"></p>
         <h1 class="hero-title">안녕하세요,<br />이유리<span>입니다.</span></h1>
         <p class="hero-copy">
-            경복비즈니스고등학교 3학년,<br />
-            IT비즈니스과 이유리입니다.
+            경복비즈니스고등학교 IT비즈니스과 3학년입니다.<br />
         </p>
         """,
         unsafe_allow_html=True,
@@ -244,7 +287,7 @@ st.write("")
 st.markdown(
     """
     <p class="section-label"></p>
-    <h2 class="section-title">저를 소개합니다</h2>
+    <h2 class="section-title">프로필</h2>
     """,
     unsafe_allow_html=True,
 )
@@ -277,6 +320,25 @@ st.markdown(
             IT와 비즈니스 분야를 함께 배워가고 있습니다.
         </p>
     </div>
+    """,
+    unsafe_allow_html=True,
+)
+
+st.markdown(
+    """
+    <section class="certificates-section">
+        <p class="section-label"></p>
+        <h2 class="section-title">취득 자격증</h2>
+        <div class="certificate-grid">
+            <div class="certificate-item"><span class="certificate-name">ITQ 아래한글</span><span class="certificate-grade">B등급</span></div>
+            <div class="certificate-item"><span class="certificate-name">ITQ 파워포인트</span><span class="certificate-grade">A등급</span></div>
+            <div class="certificate-item"><span class="certificate-name">ITQ 엑셀</span><span class="certificate-grade">A등급</span></div>
+            <div class="certificate-item"><span class="certificate-name">한국사능력검정시험</span><span class="certificate-grade">3급</span></div>
+            <div class="certificate-item"><span class="certificate-name">전산회계</span><span class="certificate-grade">1·2급</span></div>
+            <div class="certificate-item"><span class="certificate-name">컴퓨터활용능력</span><span class="certificate-grade">2급</span></div>
+            <div class="certificate-item"><span class="certificate-name">전산회계운용사</span><span class="certificate-grade">3급</span></div>
+        </div>
+    </section>
     <div class="footer"></div>
     """,
     unsafe_allow_html=True,
