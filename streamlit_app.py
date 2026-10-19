@@ -217,11 +217,11 @@ hero_copy, hero_art = st.columns([1.25, 0.75], gap="large", vertical_alignment="
 with hero_copy:
     st.markdown(
         """
-        <p class="eyebrow">A LITTLE INTRODUCTION</p>
+        <p class="eyebrow"></p>
         <h1 class="hero-title">안녕하세요,<br />이유리<span>입니다.</span></h1>
         <p class="hero-copy">
             경복비즈니스고등학교 3학년,<br />
-            IT비즈니스과에서 배우고 있는 이유리입니다.
+            IT비즈니스과 이유리입니다.
         </p>
         """,
         unsafe_allow_html=True,
@@ -243,17 +243,17 @@ st.write("")
 
 st.markdown(
     """
-    <p class="section-label">ABOUT ME</p>
+    <p class="section-label"></p>
     <h2 class="section-title">저를 소개합니다</h2>
     """,
     unsafe_allow_html=True,
 )
 
-profile = st.columns(4, gap="medium")
+profile = st.columns([0.85, 0.7, 1.6, 1.15], gap="medium")
 for column, label, value in zip(
     profile,
     ("이름", "나이", "학교", "전공"),
-    ("이유리", "19세", "경복비즈니스고등학교 · 3학년", "IT비즈니스과"),
+    ("이유리", "19세", "경복비즈니스고등학교", "IT비즈니스과"),
 ):
     with column:
         st.markdown(
@@ -271,13 +271,13 @@ st.write("")
 st.markdown(
     """
     <div class="about-card">
-        <div class="about-kicker">MY SCHOOL LIFE</div>
+        <div class="about-kicker">학교 생활</div>
         <p>
-            경복비즈니스고등학교 IT비즈니스과에서 공부하며
+            IT비즈니스과에서 회계, 사무, 코딩을 공부하며
             IT와 비즈니스 분야를 함께 배워가고 있습니다.
         </p>
     </div>
-    <div class="footer">이유리 · 자기소개</div>
+    <div class="footer"></div>
     """,
     unsafe_allow_html=True,
 )
